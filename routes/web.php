@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,9 @@ Route::get('/', function () {
 });
 
 Route::get('/orders', function () {
-    return view('orders');
-});
+    $orders = App\Models\Order::all();
+    /*echo "<pre>";
+    print_r($orders[0]->vehicle->keys);
+    die;*/
+    return view('orders', compact('orders'));
+})->name('orders');
