@@ -16,11 +16,16 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vehicle_id')->nullable();
+            $table->unsignedBigInteger('key_id')->nullable();
             $table->unsignedBigInteger('technician_id')->nullable();
             $table->timestamps();
 
             $table->foreign('vehicle_id')
                 ->references('id')->on('vehicles')
+                ->onDelete('set null');
+
+            $table->foreign('key_id')
+                ->references('id')->on('keys')
                 ->onDelete('set null');
 
             $table->foreign('technician_id')
