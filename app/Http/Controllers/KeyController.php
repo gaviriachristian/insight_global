@@ -17,11 +17,9 @@ class KeyController extends Controller
     {
         if ($request->filled('vehicle')) {
             $vehicle_id = $request->vehicle;
-            $keys = DB::table('keys')->select('keys.*')
-                ->join('key_vehicle', 'key_vehicle.key_id', '=', 'keys.id')
-                ->join('vehicles', 'vehicles.id', '=', 'key_vehicle.vehicle_id')
-                ->where('vehicles.id', $vehicle_id)
-                ->get();
+            $keys = Key::wherehas('vehicles', function($query) use($vehicle_id) {
+                        $query->where('vehicle_id', $vehicle_id);
+                    })->get();
         } else {
             $keys = Key::all();
         }

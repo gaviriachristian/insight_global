@@ -24,25 +24,25 @@ class OrderController extends Controller
 
             switch ($search_type) {
                 case "vehicle":
-                    $orders = $queryFilter->join('vehicles', 'vehicles.id', '=', 'orders.vehicle_id')
-                                ->where('make', 'LIKE', '%' . $search_query . '%')
-                                ->get();
+                    $orders = Order::wherehas('vehicle', function($query) use($search_query) {
+                                $query->where('make', 'LIKE', '%' . $search_query . '%');
+                            })->get();
                     break;
                 
                 case "key":
-                    $orders = $queryFilter->join('keys', 'keys.id', '=', 'orders.key_id')
-                                ->where('name', 'LIKE', '%' . $search_query . '%')
-                                ->get();
+                    $orders = Order::wherehas('key', function($query) use($search_query) {
+                                $query->where('name', 'LIKE', '%' . $search_query . '%');
+                            })->get();
                     break;
 
                 case "technician":
-                    $orders = $queryFilter->join('technicians', 'technicians.id', '=', 'orders.technician_id')
-                                ->where('last_name', 'LIKE', '%' . $search_query . '%')
-                                ->orWhere('first_name', 'LIKE', '%' . $search_query . '%')
-                                ->get();
+                    $orders = Order::wherehas('technician', function($query) use($search_query) {
+                                $query->where('last_name', 'LIKE', '%' . $search_query . '%')
+                                    ->orWhere('first_name', 'LIKE', '%' . $search_query . '%');
+                            })->get();
                     break;
                 default:
-                    $orders = Order::all();
+                    $orders = [];
             }
         }
         else {

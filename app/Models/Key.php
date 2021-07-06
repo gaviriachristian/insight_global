@@ -12,4 +12,8 @@ class Key extends Model
     public function vehicles() {
         return $this->belongsToMany('App\Models\Vehicle');
     }
+
+    public function orders() {
+        return $this->hasMany('App\Models\Order');
+    }
 }
