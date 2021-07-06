@@ -1,6 +1,4 @@
 @extends('template')
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="{{ asset('../resources/js/createEditOrder.js') }}"></script>
 
 @section('content')
 <h1>Create Order</h1>
@@ -9,29 +7,29 @@
   @csrf
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Vehicle</label>
-    <select class="form-select" aria-label="Default select example" name="vehicle_id" id="vehicle_id">
-      <option selected value="" onchange="changeVehicle">--Select Vehicle--</option>
+    <select class="form-select" aria-label="Default select example" name="vehicle_id" id="selector_vehicles">
+      <option selected value="">--Select Vehicle--</option>
       @foreach ($vehicles as $vehicle)
         <option value="{{ $vehicle['id'] }}" {{ old('vehicle_id') == $vehicle['id'] ? "selected" : "" }}>
-          {{ $vehicle['make'] }} {{ $vehicle['model'] }} {{ $vehicle['year'] }} {{ $vehicle['vin'] }}
+          {{ $vehicle['make'] }} | {{ $vehicle['model'] }} | {{ $vehicle['year'] }} | {{ $vehicle['vin'] }}
         </option>    
       @endforeach
     </select>
     @error('vehicle_id')
       <br>
-      <small>*{{ $message }}</small>
+      <small class='text-danger'>*{{ $message }}</small>
       <br>
     @enderror
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Key</label>
-    <select class="form-select" aria-label="Default select example" name="key_id">
-      <option selected value="1">--Select Key--</option>
+    <select class="form-select" aria-label="Default select example" name="key_id" id="selector_keys">
+      <option selected value="">--Select Key--</option>
     </select>
-    <div id="emailHelp" class="form-text">You must select a vehicle first</div>
+    <div id="emailHelp" class="form-text">Please select a vehicle first</div>
     @error('key_id')
       <br>
-      <small>*{{ $message }}</small>
+      <small class='text-danger'>*{{ $message }}</small>
       <br>
     @enderror
   </div>
@@ -47,10 +45,11 @@
     </select>
     @error('technician_id')
       <br>
-      <small>*{{ $message }}</small>
+      <small class='text-danger'>*{{ $message }}</small>
       <br>
     @enderror
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<input type="hidden" id="keys_url" value="{{ route('keys.index') }}">
 @endsection

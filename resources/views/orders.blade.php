@@ -54,19 +54,19 @@
   <tbody>
     @foreach ($data as $order)
       <tr>
-        <th class="text-center align-middle" scope="row">{{ $order['id'] }}</th>
-        <td class="text-center align-middle">{{ $order['vehicle']['make'] }}</td>
-        <td class="text-center align-middle">{{ $order['vehicle']['model'] }}</td>
-        <td class="text-center align-middle">{{ $order['vehicle']['year'] }}</td>
+        <th class="text-center" scope="row">{{ $order['id'] }}</th>
+        <td class="text-center">{{ $order['vehicle']['make'] }}</td>
+        <td class="text-center">{{ $order['vehicle']['model'] }}</td>
+        <td class="text-center">{{ $order['vehicle']['year'] }}</td>
 
         <td class="text-center">{{ $order['key']['name'] }}</td>
         <td class="text-center">{{ $order['key']['description'] }}</td>
         <td class="text-center">{{ $order['key']['price'] }}</td>
 
-        <td class="text-center align-middle">{{ $order['technician']['first_name'] }}</td>
-        <td class="text-center align-middle">{{ $order['technician']['last_name'] }}</td>
-        <td class="text-center align-middle">{{ explode('T', $order['created_at'])[0] }}</td>
-        <td class="text-center align-middle">
+        <td class="text-center">{{ $order['technician']['first_name'] }}</td>
+        <td class="text-center">{{ $order['technician']['last_name'] }}</td>
+        <td class="text-center">{{ explode('T', $order['created_at'])[0] }}</td>
+        <td class="text-center">
           <a class="btn btn-warning" href="{{ route('orders_edit', $order['id']) }}">Edit</a> | 
           <a class="btn btn-danger" href="{{ route('orders_delete', $order['id']) }}">Delete</a>
         </td>

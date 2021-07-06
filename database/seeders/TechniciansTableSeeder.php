@@ -16,20 +16,20 @@ class TechniciansTableSeeder extends Seeder
     {
         // Technician::truncate();
         $technician = new Technician();
-        $technician->first_name = 'Tech 1';
-        $technician->last_name = 'Last 1';
+        $technician->first_name = 'Jhon';
+        $technician->last_name = 'Doe';
         $technician->truck_number = '100';
         $technician->save();
 
         $technician = new Technician();
-        $technician->first_name = 'Tech 2';
-        $technician->last_name = 'Last 2';
+        $technician->first_name = 'Jhosep';
+        $technician->last_name = 'Simpson';
         $technician->truck_number = '200';
         $technician->save();
 
         $technician = new Technician();
-        $technician->first_name = 'Tech 3';
-        $technician->last_name = 'Last 3';
+        $technician->first_name = 'Christian';
+        $technician->last_name = 'Gaviria';
         $technician->truck_number = '300';
         $technician->save();
     }

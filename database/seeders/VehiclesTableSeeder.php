@@ -17,22 +17,22 @@ class VehiclesTableSeeder extends Seeder
         // Vehicle::truncate();
         $vehicle = new Vehicle();
         $vehicle->year = '2011';
-        $vehicle->make = 'M 1';
-        $vehicle->model = 'A';
+        $vehicle->make = 'Ford';
+        $vehicle->model = 'Mustang';
         $vehicle->vin = '123';
         $vehicle->save();
 
         $vehicle = new Vehicle();
         $vehicle->year = '2012';
-        $vehicle->make = 'M 2';
-        $vehicle->model = 'B';
+        $vehicle->make = 'volkswagen';
+        $vehicle->model = 'Virtus';
         $vehicle->vin = '456';
         $vehicle->save();
 
         $vehicle = new Vehicle();
         $vehicle->year = '2013';
-        $vehicle->make = 'M 3';
-        $vehicle->model = 'C';
+        $vehicle->make = 'BMW';
+        $vehicle->model = 'A5';
         $vehicle->vin = '789';
         $vehicle->save();
     }

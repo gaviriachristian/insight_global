@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Key;
 
 class KeyController extends Controller
@@ -12,9 +13,18 @@ class KeyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $keys = Key::all();
+        if ($request->filled('vehicle')) {
+            $vehicle_id = $request->vehicle;
+            $keys = DB::table('keys')->select('keys.*')
+                ->join('key_vehicle', 'key_vehicle.key_id', '=', 'keys.id')
+                ->join('vehicles', 'vehicles.id', '=', 'key_vehicle.vehicle_id')
+                ->where('vehicles.id', $vehicle_id)
+                ->get();
+        } else {
+            $keys = Key::all();
+        }
         return \response($keys);
     }
 

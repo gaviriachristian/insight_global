@@ -16,24 +16,24 @@ class KeysTableSeeder extends Seeder
     {
         // Key::truncate();
         $key = new Key();
-        $key->name = 'K name 1';
-        $key->description = 'K desc 1';
+        $key->name = 'Green Key';
+        $key->description = 'A green key';
         $key->price = '10';
         $key->save();
 
         $key->vehicles()->attach([1,2]);
 
         $key = new Key();
-        $key->name = 'K name 2';
-        $key->description = 'K desc 2';
+        $key->name = 'Red Key';
+        $key->description = 'A red key';
         $key->price = '20';
         $key->save();
 
         $key->vehicles()->attach([2,1]);
 
         $key = new Key();
-        $key->name = 'K name 3';
-        $key->description = 'K desc 3';
+        $key->name = 'Gold Key';
+        $key->description = 'A gold key';
         $key->price = '30';
         $key->save();
         

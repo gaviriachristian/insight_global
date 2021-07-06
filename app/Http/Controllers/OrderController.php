@@ -187,7 +187,7 @@ class OrderController extends Controller
         $vehicles = $vehiclesResponse->json();
 
         // Get Keys
-        $keysResponse = Http::get(route('keys.index')); // Should only load according to selected vehicle
+        $keysResponse = Http::get(route('keys.index'). '?vehicle=' . $selectedVehicle);
         $keys = $keysResponse->json();
 
         // Get Technicians
