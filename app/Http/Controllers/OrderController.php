@@ -24,28 +24,27 @@ class OrderController extends Controller
 
             switch ($search_type) {
                 case "vehicle":
-                    $orders = Order::wherehas('vehicle', function($query) use($search_query) {
-                                $query->where('make', 'LIKE', '%' . $search_query . '%');
-                            })->get();
+                    $orders = Order::wherehas('vehicle', function ($query) use ($search_query) {
+                        $query->where('make', 'LIKE', '%' . $search_query . '%');
+                    })->get();
                     break;
-                
+
                 case "key":
-                    $orders = Order::wherehas('key', function($query) use($search_query) {
-                                $query->where('name', 'LIKE', '%' . $search_query . '%');
-                            })->get();
+                    $orders = Order::wherehas('key', function ($query) use ($search_query) {
+                        $query->where('name', 'LIKE', '%' . $search_query . '%');
+                    })->get();
                     break;
 
                 case "technician":
-                    $orders = Order::wherehas('technician', function($query) use($search_query) {
-                                $query->where('last_name', 'LIKE', '%' . $search_query . '%')
-                                    ->orWhere('first_name', 'LIKE', '%' . $search_query . '%');
-                            })->get();
+                    $orders = Order::wherehas('technician', function ($query) use ($search_query) {
+                        $query->where('last_name', 'LIKE', '%' . $search_query . '%')
+                            ->orWhere('first_name', 'LIKE', '%' . $search_query . '%');
+                    })->get();
                     break;
                 default:
                     $orders = [];
             }
-        }
-        else {
+        } else {
             $orders = Order::all();
         }
         return \response($orders);
@@ -137,7 +136,7 @@ class OrderController extends Controller
         $orderResponse = Http::get(route('orders.index') . '?search_type=' . $search_type . '&search_query=' . $search_query);
         $orders = $orderResponse->json();
 
-        foreach ($orders as $order){
+        foreach ($orders as $order) {
             // Get Vehicle
             $vehicleResponse = Http::get(route('vehicles.index') . '/' . $order['vehicle_id']);
             $vehicle = $vehicleResponse->json();
@@ -149,7 +148,7 @@ class OrderController extends Controller
             // Get Technician
             $technicianResponse = Http::get(route('technicians.index') . '/' . $order['technician_id']);
             $technician = $technicianResponse->json();
-            
+
             $order['vehicle'] = $vehicle;
             $order['key'] = $key;
             $order['technician'] = $technician;
@@ -187,7 +186,7 @@ class OrderController extends Controller
         $vehicles = $vehiclesResponse->json();
 
         // Get Keys
-        $keysResponse = Http::get(route('keys.index'). '?vehicle=' . $selectedVehicle);
+        $keysResponse = Http::get(route('keys.index') . '?vehicle=' . $selectedVehicle);
         $keys = $keysResponse->json();
 
         // Get Technicians
@@ -203,7 +202,8 @@ class OrderController extends Controller
         return redirect()->route('orders_list');
     }
 
-    public function newOrder(Request $request) {
+    public function newOrder(Request $request)
+    {
         $request->validate([
             'vehicle_id' => 'required|numeric',
             'key_id' => 'required|numeric',
