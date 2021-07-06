@@ -32,6 +32,7 @@
   </div>
   <div class="col-auto m-3">
     <button type="submit" class="btn btn-primary mb-3">Filter</button>
+    <a href="{{ route('orders_list') }}" class="btn btn-light mb-3">Reset</a>
   </div>
 </form>
 
